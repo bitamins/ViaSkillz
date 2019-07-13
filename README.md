@@ -1,2 +1,0 @@
-# ViaCoin
-a slack app

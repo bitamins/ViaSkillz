@@ -5,6 +5,13 @@ client = pymongo.MongoClient(<Atlas connection string>)
 
 app = FlaskAPI(__name__)
 
+@app.route("/")
+def skillup():
+    text = 'hello this is the index'
+    print(text)
+    return text
+
+
 @app.route("/skillup", methods=['GET', 'POST'])
 def skillup():
     data = request.data

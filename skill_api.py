@@ -41,7 +41,7 @@ def listuser():
 
     retVal = 'Skills for {} \n'.format(myname)
     for key,val in docdict["skills"].items():
-        tmp = str(key) + '-' + str(val) + '\n'
+        tmp = str(key) + ' - ' + str(val) + '\n'
         retVal += tmp
 
 
@@ -53,6 +53,8 @@ def listuser():
 def listskill():
     print("listing user skills")
     mydata = mongo.db.skill
+
+    myusers = mongo.db.data
 
     text = request.data.to_dict(flat=False)['text'][0]
     args = text.split(' ')
@@ -70,7 +72,9 @@ def listskill():
 
     retVal = 'Top 10 skilled in {} \n'.format(myskill)
     for val in docdict["names"][:10]:
-        tmp = str(val) + '\n'
+        tmpdict = myusers.find_one({"name": val})
+        points = tmpdict["skills"][myskill]
+        tmp = str(val) + ' - '+ points + '\n'
         retVal += tmp
 
 

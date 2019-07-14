@@ -56,11 +56,11 @@ def listskill():
 
     text = request.data.to_dict(flat=False)['text'][0]
     args = text.split(' ')
-    myname = args[0]
+    myskill = args[0]
 
     try:
-        docdict = mydata.find_one({"name": myname}) #Debug this forsure probably
-        print('document found for {}'.format(myname))
+        docdict = mydata.find_one({"skill": myskill}) #Debug this forsure probably
+        print('document found for {}'.format(myskill))
         print(docdict)
     except Exception as e:
         print('query failed with: {}'.format(e))
@@ -69,8 +69,8 @@ def listskill():
     # {"_id":{"$oid":"5d2b52285028a4e0350e637d"},"name":"@michael.mu.sun","skills":{"python":{"$numberInt":"5"},"javascript":{"$numberInt":"2"}}}
 
     retVal = 'Skills for {} \n'.format(myname)
-    for key,val in docdict["skills"].items():
-        tmp = str(key) + '-' + str(val) + '\n'
+    for val in docdict["names"][:10]:
+        tmp = str(val) + '\n'
         retVal += tmp
 
 

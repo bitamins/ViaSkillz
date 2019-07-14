@@ -2,6 +2,7 @@ import os
 from flask_api import FlaskAPI
 from flask_pymongo import PyMongo
 from flask import request
+from werkzeug.datastructures import ImmutableMultiDict
 
 # client = pymongo.MongoClient('mongodb+srv://mb:mb@viaskillz-runjj.mongodb.net/test?retryWrites=true&w=majority')
 
@@ -25,12 +26,15 @@ def skillup():
     
     mydata = mongo.db.data
     # print(flask.request)
-    print("AAAAAAA")
+    print("Upping a skill")
     print(request.data,type(request.data))
-    text = request.data
-    # args = text.split(' ')
-    myname = text['name']
-    myskill = text['skill']
+    # myname = text['name']
+    # myskill = text['skill']
+    # imd = ImmutableMultiDict
+    text = request.data.to_dict(flat=False)['text']
+    args = text.split(' ')
+    myname = args[0] 
+    myskill = args[1]
 
 
     print('name {} skill {}'.format(myname,myskill))

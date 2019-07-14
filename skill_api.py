@@ -184,7 +184,7 @@ def skillup():
     
 
 
-    retVal = '<{}> added +1 {} to <{}>. Now at {}'.format(myvoter,myskill,myname,mypoints)
+    retVal = '<@{}> added +1 {} to <{}>. Now at {}'.format(myvoter,myskill,myname,mypoints)
 
     return retVal
 

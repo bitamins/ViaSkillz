@@ -56,13 +56,14 @@ def listskill():
 def skillup():
     # Assume user, skills collections exist
     # data = request.args
+
+    #
+    # USER COLLECTION
+    #
     
     mydata = mongo.db.data
     print("Upping a skill")
     print(request.data,type(request.data))
-    # myname = text['name']
-    # myskill = text['skill']
-    # imd = ImmutableMultiDict
     text = request.data.to_dict(flat=False)['text'][0]
     print(text,type(text))
     args = text.split(' ')
@@ -97,24 +98,10 @@ def skillup():
             }
     
     mydata.insert_one(docdict)
-
-    # # QUERYING FROM MONGODB
-    # if mydata.find({'name':name}):
-    #     # if name exists
-    #     result = mydata.update_one({name:{skill:}},{})
-    # else:
-    #     # if name not exist yet
-    #     if mydata.find({"skills".skill:})
-    #     result = mydata.insert_one(
-    #     [{   
-    #         "name": myname,
-    #         "skills":[
-    #             {skill:1}
-    #         ]
-    #     }]
-    #     )
     
-
+    #
+    # FEED COLLECTION
+    #
     #Logging the feed: Voter, Skill, Votee
     myfeed = mongo.db.feed
     mypoints = docdict["skills"][myskill]
@@ -128,6 +115,38 @@ def skillup():
                     "points": mypoints
                 }
     myfeed.insert_one(feeddict)
+
+    #
+    # SKILL COLLECTION
+    #
+    dbskill = mongo.db.skill
+
+    try:
+        docdict = dbskill.find_one({"skill": myskill}) #Debug this forsure probably
+        print('document found for {}'.format(myname))
+        print(docdict)
+    except Exception as e:
+        print('query failed with: {}'.format(e))
+        docdict = False
+
+    if docdict:
+        if myname in docdict["names"]:
+            print('Name in names {} for {}'.format(myname,myskill))
+        else:
+            print('creating new name {} for {}'.format(myname,myskill))
+            docdict["names"].append(myname)
+        mydata.remove({"skill": myskill})
+    else:
+        print('creating new skill {} and user {}'.format(myskill,myname))
+        docdict = {
+                "skill": myskill,
+                "names": [
+                    myname
+                ]
+            }
+    
+    dbskill.insert_one(docdict)
+
 
     retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
 

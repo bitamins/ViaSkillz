@@ -1,1 +1,1 @@
-python skill_api:app
+web: python skill_api:app

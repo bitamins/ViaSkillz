@@ -5,4 +5,4 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
-app.run(debug=True, port=33507)
+app.run(debug=True)

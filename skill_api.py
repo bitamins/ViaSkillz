@@ -58,7 +58,6 @@ def skillup():
     # data = request.args
     
     mydata = mongo.db.data
-    # print(flask.request)
     print("Upping a skill")
     print(request.data,type(request.data))
     # myname = text['name']
@@ -97,7 +96,6 @@ def skillup():
                 }
             }
     
-    mypoints = docdict["skills"][myskill]
     mydata.insert_one(docdict)
 
     # # QUERYING FROM MONGODB
@@ -116,6 +114,21 @@ def skillup():
     #     }]
     #     )
     retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
+    
+
+    #Logging the feed: Voter, Skill, Votee
+    myfeed = mongo.db.feed
+    mypoints = docdict["skills"][myskill]
+    myvoter = request.data.to_dict(flat=False)['user_name'][0]
+    myvotee = myname
+    myskill = myskill
+    feeddict = {
+                    "voter": myvoter,
+                    "votee": myvotee,
+                    "skill": myskill,
+                    "points": mypoints
+                }
+    mydata.insert_one(feeddict)
 
     return retVal
 

@@ -47,7 +47,9 @@ def skillup():
     print('name {} skill {}'.format(myname,myskill))
 
     try:
-        docdict = json.loads(mydata.find({"name": myname}))[0] #Debug this forsure probably
+        docdict = mydata.find({"name": myname}) #Debug this forsure probably
+        print('document found for {}'.format(myname))
+        print(docdict)
     except Exception as e:
         print('query failed with: {}'.format(e))
         docdict = False

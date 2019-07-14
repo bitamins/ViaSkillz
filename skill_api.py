@@ -1,3 +1,4 @@
+import os
 from flask_api import FlaskAPI
 from flask_pymongo import PyMongo
 
@@ -35,6 +36,8 @@ def skillup():
 
 
 if __name__ == "__main__":
-    intro = 'Running your app now!'
-    print('Hello: {}'.format(intro))
-    app.run(debug=True)
+    # intro = 'Running your app now!'
+    # print('Hello: {}'.format(intro))
+
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)

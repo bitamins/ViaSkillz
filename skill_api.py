@@ -128,7 +128,7 @@ def skillup():
                     "skill": myskill,
                     "points": mypoints
                 }
-    mydata.insert_one(feeddict)
+    myfeed.insert_one(feeddict)
 
     return retVal
 

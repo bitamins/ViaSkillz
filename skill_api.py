@@ -19,6 +19,11 @@ def index():
     return text
 
 
+@app.route("/listskill", methods=['POST'])
+def listskill():
+    pass  
+
+
 @app.route("/skillup", methods=['POST'])
 def skillup():
     # Assume user, skills collections exist
@@ -47,11 +52,14 @@ def skillup():
         docdict = False
     if docdict:
         if myskill in docdict["skills"]:
+            print('updating skill {} for {}'.format(myskill,myname))
             docdict["skills"][myskill] += 1
         else:
+            print('creating new skill {} for {}'.format(myskill,myname))
             docdict["skills"][myskill] = 1
         mydata.remove({"name": myname})
     else:
+        print('creating new skill {} and user {}'.format(myskill,myname))
         docdict = {
                 "name": myname,
                 "skills": {

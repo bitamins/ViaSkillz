@@ -77,7 +77,9 @@ def skillup():
     #     }]
     #     )
 
-    return str(myname)+" "+str(myskill)
+    retVal = 'Added +1 {} to {}'.format(myskill,myname)
+
+    return retVal
 
 
 

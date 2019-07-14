@@ -32,6 +32,7 @@ def skillup():
     # myskill = text['skill']
     # imd = ImmutableMultiDict
     text = request.data.to_dict(flat=False)['text']
+    print(text,type(text))
     args = text.split(' ')
     myname = args[0] 
     myskill = args[1]

@@ -1,3 +1,7 @@
-django
+pymongo
+flask_api
+Flask
+Flask-PyMongo
+Flask-RESTful
+Werkzeug
 gunicorn
-django-heroku

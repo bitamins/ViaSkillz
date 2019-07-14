@@ -20,10 +20,39 @@ def index():
     return text
 
 
+@app.route("/listuser", methods=['POST'])
+def listuser():
+    print("listing user skills")
+    mydata = mongo.db.data
+
+    text = request.data.to_dict(flat=False)['text'][0]
+    args = text.split(' ')
+    myname = args[0]
+
+    try:
+        docdict = mydata.find_one({"name": myname}) #Debug this forsure probably
+        print('document found for {}'.format(myname))
+        print(docdict)
+    except Exception as e:
+        print('query failed with: {}'.format(e))
+        docdict = False
+
+    # {"_id":{"$oid":"5d2b52285028a4e0350e637d"},"name":"@michael.mu.sun","skills":{"python":{"$numberInt":"5"},"javascript":{"$numberInt":"2"}}}
+
+    retVal = 'Skills for {} \n'.format(myname)
+    for key,val in docdict["skills"].items():
+        tmp = str(key) + '-' + str(val) + '\n'
+        retVal += tmp
+
+
+    print(retVal)
+
+    return retVal
+
 @app.route("/listskill", methods=['POST'])
 def listskill():
     print("listing user skills")
-    mydata = mongo.db.data
+    mydata = mongo.db.skill
 
     text = request.data.to_dict(flat=False)['text'][0]
     args = text.split(' ')

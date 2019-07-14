@@ -113,7 +113,6 @@ def skillup():
     #         ]
     #     }]
     #     )
-    retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
     
 
     #Logging the feed: Voter, Skill, Votee
@@ -129,6 +128,8 @@ def skillup():
                     "points": mypoints
                 }
     myfeed.insert_one(feeddict)
+
+    retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
 
     return retVal
 

@@ -41,7 +41,7 @@ def listskill():
 
     retVal = 'Skills for {} \n'.format(myname)
     for key,val in docdict["skills"].items():
-        tmp = str(key) + str(val.values()) + '\n'
+        tmp = str(key) + str(val) + '\n'
         retVal += tmp
 
 

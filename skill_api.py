@@ -107,7 +107,7 @@ def listfeed():
         votee = val['votee']
         skill = val['skill']
 
-        tmp = '<@{}> voted up <{}> in {}\n'.format(voter,votee,skill)
+        tmp = '<@{}> voted up <{}> for {}\n'.format(voter,votee,skill)
         retVal += tmp
 
 

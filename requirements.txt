@@ -6,4 +6,3 @@ Flask-PyMongo
 Flask-RESTful
 Werkzeug
 gunicorn
-json

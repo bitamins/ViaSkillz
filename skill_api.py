@@ -22,8 +22,12 @@ def index():
 
 @app.route("/listskill", methods=['POST'])
 def listskill():
-    pass  
+    print("listing user skills")
+    mydata = mongo.db.data
 
+    text = request.data.to_dict(flat=False)['text'][0]
+    args = text.split(' ')
+    myname = args[0]
 
 @app.route("/skillup", methods=['POST'])
 def skillup():
@@ -88,8 +92,8 @@ def skillup():
     #         ]
     #     }]
     #     )
-
-    retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
+    link = 'https://media.giphy.com/media/48FhEMYGWji8/giphy.gif'
+    retVal = 'Added +1 {} to {}. Now at {} \n {}'.format(myskill,myname,mypoints,link)
 
     return retVal
 

@@ -1,5 +1,6 @@
 pymongo
 flask_api
+dnspython
 Flask
 Flask-PyMongo
 Flask-RESTful

@@ -93,7 +93,7 @@ def listfeed():
 
     try:
         docdict = myfeed.find({}) #Debug this forsure probably
-        print('document found for {}'.format(myskill))
+        print('feed found.')
         print(docdict)
     except Exception as e:
         print('query failed with: {}'.format(e))

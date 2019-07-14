@@ -1,3 +1,7 @@
+from api_service import app
+from api_service import mongo
+
+
 @app.route("/")
 def index():
     text = 'hello this is the index'

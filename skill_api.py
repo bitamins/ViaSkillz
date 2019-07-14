@@ -47,7 +47,7 @@ def skillup():
     print('name {} skill {}'.format(myname,myskill))
 
     try:
-        docdict = mydata.find({"name": myname}) #Debug this forsure probably
+        docdict = mydata.find_one({"name": myname}) #Debug this forsure probably
         print('document found for {}'.format(myname))
         print(docdict)
     except Exception as e:

@@ -68,7 +68,7 @@ def listskill():
 
     # {"_id":{"$oid":"5d2b52285028a4e0350e637d"},"name":"@michael.mu.sun","skills":{"python":{"$numberInt":"5"},"javascript":{"$numberInt":"2"}}}
 
-    retVal = 'Skills for {} \n'.format(myskill)
+    retVal = 'Top 10 skilled in {} \n'.format(myskill)
     for val in docdict["names"][:10]:
         tmp = str(val) + '\n'
         retVal += tmp

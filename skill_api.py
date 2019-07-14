@@ -74,7 +74,7 @@ def listskill():
     for val in docdict["names"][:10]:
         tmpdict = myusers.find_one({"name": val})
         points = tmpdict["skills"][myskill]
-        tmp = str(val) + ' - '+ points + '\n'
+        tmp = str(val) + ' - '+ str(points) + '\n'
         retVal += tmp
 
 

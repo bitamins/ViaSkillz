@@ -164,7 +164,8 @@ def skillup():
         else:
             print('creating new name {} for {}'.format(myname,myskill))
             docdict["names"].append(myname)
-        mydata.remove({"skill": myskill})
+            mydata.remove({"skill": myskill})
+            dbskill.insert_one(docdict)
     else:
         print('creating new skill {} and user {}'.format(myskill,myname))
         docdict = {
@@ -173,8 +174,9 @@ def skillup():
                     myname
                 ]
             }
+        dbskill.insert_one(docdict)
     
-    dbskill.insert_one(docdict)
+    
 
 
     retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)

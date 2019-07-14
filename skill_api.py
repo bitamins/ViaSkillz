@@ -70,6 +70,7 @@ def skillup():
                 }
             }
     
+    mypoints = docdict["skills"][myskill]
     mydata.insert_one(docdict)
 
     # # QUERYING FROM MONGODB
@@ -88,7 +89,7 @@ def skillup():
     #     }]
     #     )
 
-    retVal = 'Added +1 {} to {}'.format(myskill,myname)
+    retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
 
     return retVal
 

@@ -39,7 +39,7 @@ def listuser():
 
     # {"_id":{"$oid":"5d2b52285028a4e0350e637d"},"name":"@michael.mu.sun","skills":{"python":{"$numberInt":"5"},"javascript":{"$numberInt":"2"}}}
 
-    retVal = 'Skills for {} \n'.format(myname)
+    retVal = 'Skills for <{}> \n'.format(myname)
     for key,val in docdict["skills"].items():
         tmp = str(key) + ' - ' + str(val) + '\n'
         retVal += tmp
@@ -51,7 +51,7 @@ def listuser():
 
 @app.route("/listskill", methods=['POST'])
 def listskill():
-    print("listing user skills")
+    print("listing skilled users")
     mydata = mongo.db.skill
 
     myusers = mongo.db.data
@@ -74,7 +74,7 @@ def listskill():
     for val in docdict["names"][:10]:
         tmpdict = myusers.find_one({"name": val})
         points = tmpdict["skills"][myskill]
-        tmp = str(val) + ' - '+ str(points) + '\n'
+        tmp = '<'+str(val)+'>' + ' - '+ str(points) + '\n'
         retVal += tmp
 
 
@@ -82,7 +82,38 @@ def listskill():
 
     return retVal
 
+@app.route("/listfeed", methods=['POST'])
+def listfeed():
+    print("listing skilled users")
+    myfeed = mongo.db.feed
 
+    # text = request.data.to_dict(flat=False)['text'][0]
+    # args = text.split(' ')
+    # myskill = args[0]
+
+    try:
+        docdict = myfeed.find({}) #Debug this forsure probably
+        print('feed found.')
+        print(docdict)
+    except Exception as e:
+        print('query failed with: {}'.format(e))
+        docdict = []
+
+    # {"_id":{"$oid":"5d2b52285028a4e0350e637d"},"name":"@michael.mu.sun","skills":{"python":{"$numberInt":"5"},"javascript":{"$numberInt":"2"}}}
+
+    retVal = 'Recent 10 skill feed\n'
+    for val in docdict[:10]:
+        voter = val['voter']
+        votee = val['votee']
+        skill = val['skill']
+
+        tmp = '<@{}> voted up <{}> for {}\n'.format(voter,votee,skill)
+        retVal += tmp
+
+
+    print(retVal)
+
+    return retVal
 
 
 @app.route("/skillup", methods=['POST'])
@@ -184,7 +215,7 @@ def skillup():
     
 
 
-    retVal = 'Added +1 {} to {}. Now at {}'.format(myskill,myname,mypoints)
+    retVal = '<@{}> added +1 {} to <{}>. Now at {}'.format(myvoter,myskill,myname,mypoints)
 
     return retVal
 

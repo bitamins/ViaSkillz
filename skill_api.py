@@ -215,7 +215,7 @@ def skillup():
     
 
 
-    retVal = '<@{}> endorsed {} for <{}>. Now at {} endorsement(s)!'.format(myvoter,myname,myskill,mypoints)
+    retVal = '<@{}> endorsed <@{}> for <{}>. Now at {} endorsement(s)!'.format(myvoter,myname,myskill,mypoints)
 
     return retVal
 
